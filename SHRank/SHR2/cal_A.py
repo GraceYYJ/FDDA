@@ -2,9 +2,12 @@
 from __future__ import division
 #计算迭代矩阵A的函数
 import numpy as np
-from . import cal_cluster
-from . import cal_dis_mat
-from . import common
+# from . import cal_cluster
+# from . import cal_dis_mat
+# from . import common
+import cal_cluster
+import cal_dis_mat
+import common
 
 #all_unit_cal将所有点单独计算
 def cal_node_A(list,dis_m,hl):

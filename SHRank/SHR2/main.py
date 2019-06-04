@@ -6,7 +6,8 @@ import numpy as np
 import math
 import pandas as pd
 import xlwt
-from . import cal_SHR
+# from . import cal_SHR
+import cal_SHR
 
 #汉明距离总长
 hl = 48

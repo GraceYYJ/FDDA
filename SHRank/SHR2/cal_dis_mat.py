@@ -1,7 +1,8 @@
 # coding=utf-8
 # 计算距离矩阵A的函数
 import numpy as np
-from . import common
+#from . import common
+import common
 
 
 # 对digit数据进行上三角距离计算Hamming

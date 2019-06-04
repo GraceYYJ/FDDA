@@ -7,12 +7,12 @@ import math
 import h5py
 import os.path
 import numpy as np
-from SHRank.SHR2 import cal_SHR
-
+#from SHRank.SHR2 import cal_SHR
+import cal_SHR
 __PATH__DATA = '../../DSTH/datasets/cifar10'
-__PATH__GRAPH = './graphfile'
+__PATH__RANK = './rankresult'
 
-NUM = 10
+NUM = 60000
 
 # 汉明距离总长
 hl = 48
@@ -39,12 +39,9 @@ hashcode = hashcode[0:NUM]
 # for i in range(10):
 #     [u_R, u_A, u_dis_m, u_iter_num] = cal_SHR.cal_node_Rank(hashcode, hl, rhl, oper=oper, dis_method=dis_method,
 #                                                             isRestrict=isRestrict, damping=damping, prec=prec)
-def run():
-    [u_R, u_A, u_dis_m, u_iter_num] = cal_SHR.cal_node_Rank(hashcode, hl, rhl, oper=oper, dis_method=dis_method,
-                                                          isRestrict=isRestrict, damping=damping, prec=prec)
-    return u_R
-#pass
-
-# ResultOUT = pd.DataFrame(u_R)
-# ResultPATH = r"nodeR2.xls"
-# ResultOUT.to_excel(ResultPATH)
+[u_R, u_A, u_dis_m, u_iter_num] = cal_SHR.cal_node_Rank(hashcode, hl, rhl, oper=oper, dis_method=dis_method,
+                                                        isRestrict=isRestrict, damping=damping, prec=prec)
+print(u_R[0],len(u_R))
+Resultfile = h5py.File(os.path.join(__PATH__RANK, 'cifarSHR.hy'), 'w')
+Resultfile.create_dataset("result", data=u_R)
+Resultfile.close()

@@ -2,7 +2,8 @@
 from __future__ import division
 import numpy as np
 import copy
-from . import cal_cluster
+#from . import cal_cluster
+import cal_cluster
 
 #判断节点值对于原矩阵的存在
 def check_node_hash(dic,order,hash):

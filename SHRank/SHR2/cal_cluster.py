@@ -1,7 +1,8 @@
 #coding=utf-8
 #计算迭代矩阵A的函数
 import numpy as np
-from . import common
+# from . import common
+import common
 
 #cal_cluster_list统计数据l中的唯一元素，以及它们的个数和位置
 #重组数据为{010110:[count,[index1,index2,...]],...}

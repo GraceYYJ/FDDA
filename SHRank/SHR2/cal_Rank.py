@@ -3,7 +3,8 @@ from __future__ import division
 #迭代计算得到最终的排名分数copy
 import copy
 import numpy as np
-from . import common
+#from . import common
+import common
 
 def num_iterR(A,R,num):
     while num>0:

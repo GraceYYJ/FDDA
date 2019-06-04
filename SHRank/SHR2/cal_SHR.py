@@ -4,10 +4,14 @@ from __future__ import division
 
 import numpy as np
 import math
-from . import cal_A
-from . import cal_Rank
-from . import cal_dis_mat
-from . import cal_cluster
+# from . import cal_A
+# from . import cal_Rank
+# from . import cal_dis_mat
+# from . import cal_cluster
+import cal_A
+import cal_Rank
+import cal_dis_mat
+import cal_cluster
 import time
 
 #全节点rank入口
