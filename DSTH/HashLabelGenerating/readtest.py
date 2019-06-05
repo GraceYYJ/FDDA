@@ -34,12 +34,3 @@ __PATH__ = '../datasets/cifar10'
 # print f["predicthashs"].value.shape
 # f.close()
 
-print(["===================read data18000.hy"])
-f = h5py.File(os.path.join(__PATH__, 'data18000.hy'), 'r')
-for key in f.keys():
-    print(f[key].name)
-    # for key2 in f[key].keys():
-    #     print f[key][key2].name
-    #     print f[key][key2].value
-    #     print f[key][key2].value.shape
-f.close()

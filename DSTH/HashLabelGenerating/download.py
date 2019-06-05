@@ -45,6 +45,21 @@ def prepare_h5py(train_image, train_label, test_image, test_label, data_dir, sha
     return
 
 
+def prepare_h5py_extend(train_image, train_label, test_image, test_label, data_dir):
+    image = np.concatenate((train_image, test_image), axis=0).astype(np.uint8)
+    newimage = np.concatenate((train_image, test_image), axis=0).astype(np.uint8)
+
+    for i in range(9):
+        newimage = np.concatenate((newimage, image), axis=0)
+
+    newimage = np.reshape(newimage, (600000, 32, 32, 3))
+
+    f = h5py.File(os.path.join(data_dir, 'data60w.hy'), 'w')
+    f.create_dataset("data60w", data=newimage)
+    f.close()
+    return
+
+
 def check_file(data_dir):
     if os.path.exists(data_dir):
         if os.path.isfile(os.path.join('data.hy')) and \
@@ -144,14 +159,14 @@ def download_cifar10(download_path):
         print('CIFAR was downloaded.')
         return
 
-    data_url = 'https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz'
-    k = 'cifar-10-python.tar.gz'
-    target_path = os.path.join(data_dir, k)
-    print(target_path)
-    cmd = ['curl', data_url, '-o', target_path]
-    print('Downloading CIFAR10')
-    subprocess.call(cmd)
-    tarfile.open(target_path, 'r:gz').extractall(data_dir)
+    # data_url = 'https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz'
+    # k = 'cifar-10-python.tar.gz'
+    # target_path = os.path.join(data_dir, k)
+    # print(target_path)
+    # cmd = ['curl', data_url, '-o', target_path]
+    # print('Downloading CIFAR10')
+    # subprocess.call(cmd)
+    # tarfile.open(target_path, 'r:gz').extractall(data_dir)
 
     num_cifar_train = 50000
     num_cifar_test = 10000
@@ -173,12 +188,13 @@ def download_cifar10(download_path):
     test_image = np.reshape(dict['data'], [num_cifar_test, 32 * 32 * 3])
     test_label = np.reshape(dict['labels'], [num_cifar_test])
 
-    prepare_h5py(train_image, train_label, test_image, test_label, data_dir, [32, 32, 3])
+    prepare_h5py_extend(train_image, train_label, test_image, test_label, data_dir)
+    # prepare_h5py(train_image, train_label, test_image, test_label, data_dir, [32, 32, 3])
     # prepare_h5py(train_image, train_label, test_image, test_label, data_dir)
-    cmd = ['rm', '-f', os.path.join(data_dir, 'cifar-10-python.tar.gz')]
-    subprocess.call(cmd)
-    cmd = ['rm', '-rf', os.path.join(data_dir, 'cifar-10-batches-py')]
-    subprocess.call(cmd)
+    # cmd = ['rm', '-f', os.path.join(data_dir, 'cifar-10-python.tar.gz')]
+    # subprocess.call(cmd)
+    # cmd = ['rm', '-rf', os.path.join(data_dir, 'cifar-10-batches-py')]
+    # subprocess.call(cmd)
 
 
 if __name__ == '__main__':
@@ -192,4 +208,5 @@ if __name__ == '__main__':
     # if 'SVHN' in args.datasets:
     #     download_svhn('./datasets')
     # if 'CIFAR10' in args.datasets:
-    download_cifar10('D:/Project/FDDA/DSTH')
+    # download_cifar10('D:/Project/FDDA/DSTH')
+    download_cifar10('/tfproject/FDDA/DSTH/datasets')
